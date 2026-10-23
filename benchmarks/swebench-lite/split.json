@@ -1,0 +1,83 @@
+{
+  "dataset": "princeton-nlp/SWE-bench_Lite",
+  "dataset_revision": "6ec7bb89b9342f664a54a6e0a6ea6501d3437cc2",
+  "dev": [
+    {
+      "instance_id": "marshmallow-code__marshmallow-1343",
+      "repo": "marshmallow-code/marshmallow"
+    },
+    {
+      "instance_id": "marshmallow-code__marshmallow-1359",
+      "repo": "marshmallow-code/marshmallow"
+    },
+    {
+      "instance_id": "pylint-dev__astroid-1333",
+      "repo": "pylint-dev/astroid"
+    },
+    {
+      "instance_id": "pylint-dev__astroid-1866",
+      "repo": "pylint-dev/astroid"
+    },
+    {
+      "instance_id": "pydicom__pydicom-1256",
+      "repo": "pydicom/pydicom"
+    },
+    {
+      "instance_id": "pydicom__pydicom-901",
+      "repo": "pydicom/pydicom"
+    },
+    {
+      "instance_id": "sqlfluff__sqlfluff-1517",
+      "repo": "sqlfluff/sqlfluff"
+    },
+    {
+      "instance_id": "sqlfluff__sqlfluff-1763",
+      "repo": "sqlfluff/sqlfluff"
+    }
+  ],
+  "test": [
+    {
+      "instance_id": "django__django-15320",
+      "repo": "django/django"
+    },
+    {
+      "instance_id": "pytest-dev__pytest-9359",
+      "repo": "pytest-dev/pytest"
+    },
+    {
+      "instance_id": "sphinx-doc__sphinx-8801",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "instance_id": "pylint-dev__pylint-5859",
+      "repo": "pylint-dev/pylint"
+    },
+    {
+      "instance_id": "sympy__sympy-13915",
+      "repo": "sympy/sympy"
+    },
+    {
+      "instance_id": "django__django-10914",
+      "repo": "django/django"
+    },
+    {
+      "instance_id": "pytest-dev__pytest-5103",
+      "repo": "pytest-dev/pytest"
+    },
+    {
+      "instance_id": "sphinx-doc__sphinx-7686",
+      "repo": "sphinx-doc/sphinx"
+    },
+    {
+      "instance_id": "pylint-dev__pylint-6506",
+      "repo": "pylint-dev/pylint"
+    },
+    {
+      "instance_id": "sympy__sympy-11400",
+      "repo": "sympy/sympy"
+    }
+  ],
+  "protocol": "fixed-8dev-10test-v1",
+  "usage": "Use dev for development and test for evaluation. Test contains two tasks per repository across five repositories.",
+  "environment_failure": "Report infrastructure failures for the same task; do not replace tasks based on outcomes."
+}

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="repair-token" content="__SESSION_TOKEN__">
+  <title>代码修复 · MendPilot</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="eyebrow"><span class="dot"></span> LOCAL WORKSPACE</div>
+      <h1>把问题交给修复 Agent</h1>
+      <p>上传一个 Python 文件，描述问题，连接你的模型。修复在当前本地环境的代码副本中完成。</p>
+    </header>
+
+    <div class="layout">
+      <form id="repair-form" class="card">
+        <div class="section-title"><span>01</span><h2>文件与任务</h2></div>
+        <label id="dropzone" class="dropzone" tabindex="0" role="button" aria-label="拖入或选择一个 Python 文件">
+          <input id="file" name="file" type="file" accept=".py" hidden>
+          <span class="upload-icon" aria-hidden="true">↑</span>
+          <strong id="file-label">拖入 Python 文件，或点击选择</strong>
+          <small id="file-detail">单个 .py 文件 · UTF-8 · 最大 1 MiB</small>
+        </label>
+        <label for="task">问题描述</label>
+        <textarea id="task" name="task" rows="5" maxlength="20000" required placeholder="例如：average([]) 会抛出 ZeroDivisionError，期望返回 0；非空列表的计算行为保持不变。请先复现再修复。"></textarea>
+        <p class="hint">写清触发输入、实际报错和期望行为。依赖其他文件的任务请使用 CLI 项目模式。</p>
+
+        <div class="section-title second"><span>02</span><h2>模型连接</h2></div>
+        <label for="base-url">API Base URL</label>
+        <input id="base-url" name="base_url" type="url" required placeholder="http://127.0.0.1:8002/v1" autocomplete="off">
+        <div class="fields">
+          <div><label for="model">模型名称</label><input id="model" name="model" required maxlength="200" placeholder="qwen2.5-7b-instruct" autocomplete="off"></div>
+          <div><label for="api">接口格式</label><select id="api" name="api"><option value="chat_completions">Chat Completions</option><option value="responses">Responses</option></select></div>
+        </div>
+        <label for="api-key">API key <span class="optional">本机无鉴权服务可留空</span></label>
+        <input id="api-key" name="api_key" type="password" maxlength="4096" autocomplete="off" placeholder="仅用于本次运行，不保存到浏览器或配置文件">
+        <p class="hint">Base URL 相对于启动服务的机器；127.0.0.1 指该机器自身。</p>
+        <button id="start" type="submit">开始修复 <span aria-hidden="true">↗</span></button>
+        <p id="form-error" class="error" role="alert"></p>
+      </form>
+
+      <section class="card result-card" aria-label="修复进度与结果">
+        <div class="result-heading"><h2>运行与结果</h2><span id="status" class="badge" role="status">等待任务</span></div>
+        <p id="result-message" class="result-message" aria-live="polite">提交后，这里会显示进度、调用次数和修复差异。</p>
+        <div class="metrics">
+          <div><small>模型调用</small><strong id="calls">—</strong></div>
+          <div><small>总用时</small><strong id="elapsed">—</strong></div>
+          <div><small>提交状态</small><strong id="exit-status">—</strong></div>
+        </div>
+        <div class="log-heading"><h3>运行日志</h3><button id="cancel" type="button" class="text-button" hidden>停止任务</button></div>
+        <pre id="logs" class="logs" tabindex="0">尚未开始运行。</pre>
+        <div id="downloads" class="downloads" hidden>
+          <a id="download-file" class="download" href="#">下载修复文件</a>
+          <a id="download-patch" class="download secondary" href="#">下载补丁</a>
+        </div>
+        <h3>提交差异</h3>
+        <pre id="patch" class="patch" tabindex="0">完成后显示提交补丁。</pre>
+        <p class="hint">“已提交修复”表示 Agent 生成了补丁。网页不接收独立测试命令，请检查下载文件并在自己的场景中验证。</p>
+      </section>
+    </div>
+    <footer><span>单文件 · 本地执行 · 原文件保留</span><span id="environment"></span></footer>
+  </main>
+</body>
+</html>

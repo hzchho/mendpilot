@@ -1,0 +1,11 @@
+model:
+  name: qwen2.5-7b-instruct
+  base_url: http://127.0.0.1:8002/v1
+  api: chat_completions
+  api_key_env: MENDPILOT_API_KEY
+limits:
+  input_tokens: 24000
+  output_tokens: 8192
+  steps: 30
+  seconds: 900
+  tool_timeout: 60

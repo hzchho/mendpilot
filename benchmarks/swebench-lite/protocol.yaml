@@ -1,0 +1,31 @@
+name: fixed-8dev-10test-v1
+dataset: princeton-nlp/SWE-bench_Lite
+dataset_revision: 6ec7bb89b9342f664a54a6e0a6ea6501d3437cc2
+split_sha256: 5c4c8b13ca35420f301dc8d9ac95293226ae247c04742b2dfc3da71e196c388c
+limits:
+  input_tokens: 24000
+  output_tokens_per_request: 8192
+  agent_calls: 30
+  wall_time_seconds: 900
+chat:
+  tokenizer: user-supplied local model tokenizer, local_files_only
+  temperature: 0
+  seed: 42
+  http_retries: 0
+responses:
+  input_count: o200k_base serialized messages and tools, multiplied by 1.25, plus 8192 overhead
+  total_output_tokens: 65536
+  reasoning_effort: omitted; provider default
+  http_retries: 2
+counts:
+  agent_calls: query attempts including attempts stopped before HTTP
+  http_attempts: SDK request attempts, including transient retries
+  elapsed_seconds: generation including container setup, model/network, tools and cleanup; excludes model startup and independent scoring
+evaluation:
+  harness: swebench==4.1.0
+  hidden_tests: independent scorer only
+  setup: offline editable reinstall; test commands and grading unchanged
+limitations:
+  - Single run on a previously used small regression set, not a blind benchmark.
+  - Token counting, sampling, API dialect and aggregate output caps differ across transports.
+  - User profiles may override budgets; each new manifest records actual settings.
